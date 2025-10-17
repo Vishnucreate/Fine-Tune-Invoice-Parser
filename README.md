@@ -1,35 +1,56 @@
-# Fine-Tune-Invoice-Parser
-# Invoice Parser Fine-Tuning (SmolVLM / Idefics-3 + TRL + LoRA)
+# 🧾 Fine-Tune-Invoice-Parser
 
-Fine-tune **HuggingFaceTB/SmolVLM-Instruct (Idefics-3)** to extract structured JSON from invoices using the dataset
-[`mychen76/invoices-and-receipts_ocr_v1`]. This repo provides:
-- End-to-end training script (dataset → preprocessing → LoRA → TRL SFT → eval)
-- Reproducible environment (pip)
-- Optional GPU/precision guidance (bf16/fp16)
-- Simple website header animation for your project page (HTML/CSS/SVG) ✨
+### Invoice Parser Fine-Tuning (SmolVLM / Idefics-3 + TRL + LoRA)
 
----
+This project fine-tunes **HuggingFaceTB/SmolVLM-Instruct (Idefics-3)** to extract structured JSON data from invoice images using the dataset  
+[`mychen76/invoices-and-receipts_ocr_v1`](https://huggingface.co/datasets/mychen76/invoices-and-receipts_ocr_v1).
 
-## 1) Quickstart (Colab)
-
-> The simplest path is Colab — 1 GPU, paste the **`colab_train.py`** cell into a single Colab cell.
-
-- Open Colab → Runtime ▸ Change runtime type ▸ **GPU**
-- Copy/paste **`colab_train.py`** into one cell and run.
-- Outputs are saved to `./outputs` and `./fine_tuned_model`.
+It’s designed as an **end-to-end, single-file Colab workflow** — load → preprocess → fine-tune (LoRA + TRL SFT) → evaluate.
 
 ---
 
-## 2) Local Setup (Linux/Mac)
+## 🌟 Features
+
+- 🔧 **One-click training**: Run everything inside `colab_train.ipynb`
+- 🧠 **Vision-Language Fine-Tuning** with *SmolVLM/Idefics-3*
+- ⚙️ **LoRA + TRL SFT** integration for efficient parameter-efficient training
+- 🧾 **Evaluation Script** for loss + output comparison
+- 💡 **Colab-friendly** — no API keys, fully open-source
+- 🚀 **Reproducible Environment** (uses specific versions of `transformers`, `trl`, `peft`)
+
+---
+
+## 🪄 Quickstart (Google Colab)
+
+1. Open the Colab notebook:  
+   **[`colab_train.ipynb`](https://colab.research.google.com/github/Vishnuratee/Fine-Tune-Invoice-Parser/blob/main/Fine-tune_Invoice_Parser.ipynb)**
+
+2. In Colab:
+   - Go to **Runtime → Change runtime type → GPU**
+   - Click **Run all**
+
+3. The script will:
+   - Download dataset  
+   - Preprocess & format training JSON  
+   - Apply LoRA adapters  
+   - Fine-tune via TRL SFT  
+   - Save checkpoints in `./outputs/`  
+   - Save the final model to `./fine_tuned_model/`  
+   - Run evaluation (`loss + predictions`)
+
+---
+
+## 🧰 Local Setup (Linux / Mac)
 
 ```bash
-git clone <your-repo-url> invoice-parser-vlm
-cd invoice-parser-vlm
+# Clone repository
+git clone https://github.com/Vishnuratee/Fine-Tune-Invoice-Parser.git
+cd Fine-Tune-Invoice-Parser
 
-# Python 3.10+ recommended
-python -m venv .venv
-source .venv/bin/activate
+# Create environment
+python3 -m venv venv
+source venv/bin/activate
 
+# Install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
-
